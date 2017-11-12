@@ -16,8 +16,6 @@ func NewGoballClient(token string) Client {
 	return Client{httpClient: httpClient, authToken: token}
 }
 
-
-
 func (c Client) NewCompetitionRequest() CompetitionRequest {
 	req := CompetitionRequest{request{"/competitions", nil}}
 	return req
