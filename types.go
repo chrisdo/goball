@@ -100,13 +100,15 @@ type Head2Head struct {
 
 //Fixture describes a match including date, status...
 type Fixture struct {
-	Date         time.Time
-	Status       Status
-	Matchday     uint16
-	HomeTeamName string
-	AwayTeamName string
-	Result       Result
-	Head2Head    Head2Head
+	ID            uint32 `json:"id"`
+	CompetitionID uint16 `json:"competitionId"`
+	Date          time.Time
+	Status        Status
+	Matchday      uint16
+	HomeTeamName  string
+	AwayTeamName  string
+	Result        Result
+	Head2Head     Head2Head
 }
 
 //FixtureListResult is the result of a requst of a fixtureList for a competition
