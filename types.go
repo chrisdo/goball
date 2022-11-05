@@ -56,30 +56,32 @@ const (
 	WorldCup              string = "WC"
 )
 
+type CompetitionResult struct {
+	Count        int            `json:"count"`
+	Competitions []*Competition `json:"competitions"`
+}
+
 //Competition desribes a competition, like a tournament or a league
 type Competition struct {
-	ID                uint32
-	Caption           string
-	League            string
-	Year              string
-	CurrentMatchday   uint16
-	NumberOfMatchdays uint16
-	NumberOfTeams     uint8
-	numberOfGames     uint16
-	LastUpdated       time.Time
+	ID          uint32    `json:"id"`
+	Name        string    `json:"name"`
+	Type        string    `json:"type"`
+	LastUpdated time.Time `json:"lastUpdated"`
 }
 
 //Score describes the current number of goals for each team
 type Score struct {
-	GoalsHomeTeam uint8
-	GoalsAwayTeam uint8
+	Home uint8
+	Away uint8
 }
 
 //Result describes several Scores of a fixture splitup into actual score, halftime, extratime and penalty
 type Result struct {
-	Score
-	HalfTime        Score
-	ExtraTime       Score
+	Winner   string
+	Duration string
+	//HalfTime        Score
+	//ExtraTime       Score
+	FullTime        Score
 	PenaltyShootout Score
 }
 
@@ -100,21 +102,20 @@ type Head2Head struct {
 
 //Fixture describes a match including date, status...
 type Fixture struct {
-	ID            uint32 `json:"id"`
-	CompetitionID uint16 `json:"competitionId"`
-	Date          time.Time
+	ID            uint32    `json:"id"`
+	CompetitionID uint16    `json:"competitionId"`
+	Date          time.Time `json:"utcDate"`
 	Status        Status
 	Matchday      uint16
-	HomeTeamName  string
-	AwayTeamName  string
-	Result        Result
-	Head2Head     Head2Head
+	HomeTeam      *Team
+	AwayTeam      *Team
+	Result        Result `json:"score"`
 }
 
 //FixtureListResult is the result of a requst of a fixtureList for a competition
 type FixtureListResult struct {
-	Count    uint16
-	Fixtures []Fixture
+	Competition *Competition `json:"competition"`
+	Matches     []Fixture    `json:"matches"`
 }
 
 //TimeFramedFixtureListResult is the result of a requst of a fixtureListRequest
@@ -132,11 +133,9 @@ type CompetitionTeamsResult struct {
 
 //Team describes a team
 type Team struct {
-	Name             string
-	Code             string
-	Shortname        string
-	SquadMarketValue string
-	CrestURL         string
+	Name      string
+	Shortname string
+	CrestURL  string
 }
 
 //Player describes a football player, e.g. position, name...

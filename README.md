@@ -4,7 +4,8 @@ This library is intended to provide access to the football-data.org API in Go.
 All features from https://api.football-data.org/documentation are supported.
 
 ## Attention
-This library is still in development state and not adivsed to be used in production right now. The documentation at football-data.org seems to be a bit incomplete, therefore the intended behaviour still needs to be verified.
+This library is still in development state and not adivsed to be used in production right now. I just started to convert from v1 to v4, still need to update a few requests and response types.
+Also ,the naming is not correct any more, e.g. in v1 a Match was a Fixture. So partly in code it is still a Fixture.
 
 ### Planned Actions
 * cleanup code
@@ -27,10 +28,12 @@ func main() {
 
     competitionRequest := goballClient.NewCompetitionRequest()
     comps := competitionRequest.Send(&goballClient)
-    for _, c := range comps {
+    for _, c := range comps.Competitions {
 	fmt.Printf("%s: %d\n", c.Caption, c.ID)
     }
 
+
+    //ATTENTION: THE FOLLOWING CODE SAMPLE IS NOT UPDATED YET TO v4
 
     //the resulting standings of a league competitions, e.g. premier league
     leagueTableRequest := goballClient.NewCompetitionLeagueTableRequest(id)

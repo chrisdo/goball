@@ -1,10 +1,12 @@
 package goball
 
-import "net/http"
-import "time"
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+	"time"
+)
 
-//Client is a client for the football-data.org
+// Client is a client for the football-data.org
 type Client struct {
 	httpClient *http.Client
 	authToken  string
@@ -32,7 +34,7 @@ func (c Client) NewCompetitionLeagueTableRequest(competitionId uint32) Competiti
 }
 
 func (c Client) NewCompetitionFixturesRequest(competitionId uint32) CompetitionFixturesRequest {
-	req := CompetitionFixturesRequest{request{fmt.Sprintf("/competitions/%d/fixtures", competitionId), nil}}
+	req := CompetitionFixturesRequest{request{fmt.Sprintf("/competitions/%d/matches", competitionId), nil}}
 	return req
 }
 

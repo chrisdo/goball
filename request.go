@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	ADDRESS string = "http://football-data.org/"
-	VERSION string = "v1"
+	ADDRESS string = "http://api.football-data.org/"
+	VERSION string = "v4"
 
 	ParamLeague    string = "league"
 	ParamSeason    string = "season"
@@ -22,13 +22,13 @@ const (
 	ParamMatchday  string = "matchday"
 )
 
-//Request describes the URI endpoint and contains possible parameters, TODO: add a possible client for football-data.org
+// Request describes the URI endpoint and contains possible parameters, TODO: add a possible client for football-data.org
 type request struct {
 	uri       string //the uri of the resource to be requested, e.g. /v1/competitions
 	parameter url.Values
 }
 
-//run the execute to the request
+// run the execute to the request
 func (r request) getData(c *Client) (j *json.Decoder, err error) {
 	//1. generate the url for this request based on the url to football-data.org, the uri and the parameters
 	//parse the adress
