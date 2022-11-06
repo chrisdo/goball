@@ -21,7 +21,7 @@ func main() {
 	fmt.Printf("Comps: %d\n", comps.Count)
 	for _, f := range comps.Competitions {
 
-		fmt.Printf("%s -->%d\n", f.Name, f.ID)
+		fmt.Printf("%v\n", f)
 
 	}
 
@@ -31,7 +31,7 @@ func main() {
 
 	for _, f := range fixtures.Matches {
 
-		fmt.Printf("%s -->%d --> %s : %s\n", f.Date, f.ID, f.HomeTeam, f.AwayTeam)
+		fmt.Printf("%v\n", f)
 
 	}
 }

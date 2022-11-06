@@ -13,6 +13,8 @@ type Venue string
 
 type PastNext string
 
+type Stage string
+
 const (
 	Past PastNext = "p"
 	Next PastNext = "n"
@@ -24,6 +26,35 @@ const (
 	Postponed Status = "POSTPONED"
 	InPlay    Status = "IN_PLAY"
 	Finished  Status = "FINISHED"
+)
+
+const (
+	FINAL                 Stage = "FINAL"
+	THIRD_PLACE           Stage = "THIRD_PLACE"
+	SEMI_FINALS           Stage = "SEMI_FINALS"
+	QUARTER_FINALS        Stage = "QUARTER_FINALS"
+	LAST_16               Stage = "LAST_16"
+	LAST_32               Stage = "LAST_32"
+	LAST_64               Stage = "LAST_64"
+	ROUND_4               Stage = "ROUND_4"
+	ROUND_3               Stage = "ROUND_3"
+	ROUND_2               Stage = "ROUND_2"
+	ROUND_1               Stage = "ROUND_1"
+	GROUP_STAGE           Stage = "RGROUP_STAGE"
+	PRELIMINARY_ROUND     Stage = "PRELIMINARY_ROUND"
+	QUALIFICATION         Stage = "QUALIFICATION"
+	QUALIFICATION_ROUND_1 Stage = "QUALIFICATION_ROUND_1"
+	QUALIFICATION_ROUND_2 Stage = "QUALIFICATION_ROUND_2"
+	QUALIFICATION_ROUND_3 Stage = "QUALIFICATION_ROUND_3"
+	PLAYOFF_ROUND_1       Stage = "PLAYOFF_ROUND_1"
+	PLAYOFF_ROUND_2       Stage = "PLAYOFF_ROUND_2"
+	PLAYOFFS              Stage = "PLAYOFFS"
+	REGULAR_SEASON        Stage = "REGULAR_SEASON"
+	CLAUSURA              Stage = "CLAUSURA"
+	APERTURA              Stage = "APERTURA"
+	CHAMPIONSHIP          Stage = "CHAMPIOSHIP"
+	RELEGATION            Stage = "RELEGATION"
+	RELEGATION_ROUND      Stage = "RELEGATION_ROUND"
 )
 
 const (
@@ -45,7 +76,7 @@ const (
 	SpainPrimeraDivision  string = "PD"
 	SpainSegundaDivision  string = "SD"
 	SpainCopaDelRey       string = "CDR"
-	FrancueLigue1         string = "FL!"
+	FrancueLigue1         string = "FL1"
 	FranceLigue2          string = "FL2"
 	NetherlandsEredivise  string = "DED"
 	PortugalPrimeiraLiga  string = "PPL"
@@ -77,10 +108,8 @@ type Score struct {
 
 //Result describes several Scores of a fixture splitup into actual score, halftime, extratime and penalty
 type Result struct {
-	Winner   string
-	Duration string
-	//HalfTime        Score
-	//ExtraTime       Score
+	Winner          string `json:"winner"`
+	Duration        string `json:"duration"`
 	FullTime        Score
 	PenaltyShootout Score
 }
@@ -106,6 +135,8 @@ type Fixture struct {
 	CompetitionID uint16    `json:"competitionId"`
 	Date          time.Time `json:"utcDate"`
 	Status        Status
+	Venue         string
+	Stage         Stage
 	Matchday      uint16
 	HomeTeam      *Team
 	AwayTeam      *Team
